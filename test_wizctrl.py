@@ -55,29 +55,35 @@ class TestSwitchBulb(IsolatedAsyncioTestCase):
     def tearDown(self):
         del self.wizctrl
 
-class TestTurnBulbOnScene(IsolatedAsyncioTestCase):
+class TestTurnBulbOnSceneId(IsolatedAsyncioTestCase):
     def setUp(self):
         self.wizctrl = wizctrl.Wizctrl(args.IP)
         self.scene_id = 23
 
-    async def test_turn_bulb_on_scene(self):
-        await self.wizctrl.turn_bulb_on_scene(self.scene_id)
+    async def test_turn_bulb_on_scene_id(self):
+        await self.wizctrl.turn_bulb_on_scene_id(self.scene_id)
         state = await self.wizctrl.light.updateState()
         scene_name = state.get_scene()
-        self.assertEqual(self.wizctrl.light.get_id_from_scene_name(scene_name), self.scene_id)
+        scene_id = self.wizctrl.light.get_id_from_scene_name(scene_name)
+        self.assertEqual(scene_id, self.scene_id)
 
     def tearDown(self):
         del self.wizctrl
         del self.scene_id
 
-class TestTurnBulbOnSceneInvalid(IsolatedAsyncioTestCase):
+class TestTurnBulbOnSceneIdInvalid(IsolatedAsyncioTestCase):
     def setUp(self):
         self.wizctrl = wizctrl.Wizctrl(args.IP)
-        self.scene_id = 9999
+        self.scene_id = 0
 
-    async def test_turn_bulb_on_scene_invalid(self):
+    async def test_turn_bulb_on_scene_id_invalid(self):
         with self.assertRaises(IndexError):
-            await self.wizctrl.turn_bulb_on_scene(self.scene_id)
+            await self.wizctrl.turn_bulb_on_scene_id(self.scene_id)
+
+        self.scene_id = 33
+
+        with self.assertRaises(IndexError):
+            await self.wizctrl.turn_bulb_on_scene_id(self.scene_id)
 
     def tearDown(self):
         del self.wizctrl
