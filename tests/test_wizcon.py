@@ -98,7 +98,7 @@ class TestTurnBulbOnSceneAll(IsolatedAsyncioTestCase):
             #if s == 1000:      # Skip scene 1000 Rhythm which fails test
             #    continue
 
-            await self.wizcon.turn_bulb_on_scene(scene_id)
+            await self.wizcon.turn_bulb_on_scene_id(scene_id)
             state = await self.wizcon.light.updateState()
             scene_name = state.get_scene()
             self.assertEqual(self.wizcon.light.get_id_from_scene_name(scene_name), scene_id)
@@ -106,9 +106,9 @@ class TestTurnBulbOnSceneAll(IsolatedAsyncioTestCase):
     def tearDown(self):
         del self.wizcon
 
-class TestwizconScene(IsolatedAsyncioTestCase):
+class TestWizconScene(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.args = wizcon.parse_args([args.IP, 'on', '--scene=1'])
+        self.args = wizcon.parse_args([args.IP, 'on', '--scene_id=1'])
         self.wizcon = wizcon.Wizcon(self.args.IP)
 
     async def test_wizcon_scene(self):
@@ -116,7 +116,7 @@ class TestwizconScene(IsolatedAsyncioTestCase):
 
         state = await self.wizcon.light.updateState()
         scene_name = state.get_scene()
-        self.assertEqual(self.wizcon.light.get_id_from_scene_name(scene_name), self.args.scene)
+        self.assertEqual(self.wizcon.light.get_id_from_scene_name(scene_name), self.args.scene_id)
 
     def tearDown(self):
         del self.args
