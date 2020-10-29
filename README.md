@@ -1,5 +1,5 @@
-# wizctrl
-Control Philips WiZ smart light bulbs
+# wizcon
+Control Philips WiZ Connected smart light bulbs
 
 ## Requirements
 - [Python 3](https://www.python.org/downloads/)
@@ -7,9 +7,9 @@ Control Philips WiZ smart light bulbs
 
 ## Usage
 ```
-usage: wizctrl.py [-h] [-si {1-32}] IP {ON,OFF,SWITCH}
+usage: wizcon.py [-h] [-si {1-32}] IP {ON,OFF,SWITCH}
 
-Control Philips WiZ smart light bulbs
+Control Philips WiZ Connected smart light bulbs
 
 positional arguments:
   IP                    IP address of smart bulb
@@ -57,23 +57,23 @@ Scene Table
 Examples
 
 Turn smart bulb on:
-python3 wizctrl.py 192.168.1.100 ON
+python3 wizcon.py 192.168.1.100 ON
 
 Turn smart bulb off:
-python3 wizctrl.py 192.168.1.100 OFF
+python3 wizcon.py 192.168.1.100 OFF
 
 Switch smart bulb between on and off states:
-python3 wizctrl.py 192.168.1.100 SWITCH
+python3 wizcon.py 192.168.1.100 SWITCH
 
 Set scene to "Deepdive" using scene ID:
-python3 wizctrl.py 192.168.1.100 ON --scene_id 23
+python3 wizcon.py 192.168.1.100 ON --scene_id 23
 ```
 
 ## Source code
-https://github.com/rgomezjnr/wizctrl
+https://github.com/rgomezjnr/wizcon
 
 ## Author
 [Robert Gomez, Jr.](https://github.com/rgomezjnr)
 
 ## License
-[MIT](https://github.com/rgomezjnr/wizctrl/blob/master/LICENSE.txt)
+[MIT](https://github.com/rgomezjnr/wizcon/blob/master/LICENSE.txt)

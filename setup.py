@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="wizctrl",
+    name="wizcon",
     version="0.1.0",
     author="Robert Gomez, Jr.",
     author_email="rgomezjnr@gmail.com",
-    description="Control Philips WiZ smart light bulbs",
+    description="Control Philips WiZ Connected smart light bulbs",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/rgomezjnr/wizctrl",
+    url="https://github.com/rgomezjnr/wizcon",
     packages=setuptools.find_packages(),
     python_requires='>=3.6',
     install_requires=["pywizlight"],

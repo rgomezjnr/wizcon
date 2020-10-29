@@ -5,7 +5,7 @@ import argparse
 import textwrap
 from pywizlight.bulb import wizlight, PilotBuilder
 
-class Wizctrl():
+class Wizcon():
     def __init__(self, ip):
         self.light = wizlight(ip)
 
@@ -36,7 +36,7 @@ class Wizctrl():
             await self.switch_bulb()
 
 def parse_args(args):
-    parser = argparse.ArgumentParser(description='Control Philips WiZ smart light bulbs',
+    parser = argparse.ArgumentParser(description='Control Philips WiZ Connected smart light bulbs',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=textwrap.dedent('''\
         Scene Table
@@ -76,16 +76,16 @@ def parse_args(args):
         Examples
 
         Turn smart bulb on:
-        python3 wizctrl.py 192.168.1.100 ON
+        python3 wizcon.py 192.168.1.100 ON
 
         Turn smart bulb off:
-        python3 wizctrl.py 192.168.1.100 OFF
+        python3 wizcon.py 192.168.1.100 OFF
 
         Switch smart bulb between on and off states:
-        python3 wizctrl.py 192.168.1.100 SWITCH
+        python3 wizcon.py 192.168.1.100 SWITCH
 
         Set scene to "Deepdive" using scene ID:
-        python3 wizctrl.py 192.168.1.100 ON --scene_id 23
+        python3 wizcon.py 192.168.1.100 ON --scene_id 23
         '''))
     parser.add_argument('IP', type=str, help='IP address of smart bulb')
     parser.add_argument('COMMAND', type=str.upper, choices=['ON', 'OFF', 'SWITCH'], help='Command sent to the smart bulb')
@@ -99,8 +99,8 @@ def parse_args(args):
 
 async def main():
     args = parse_args(None)
-    wizctrl = Wizctrl(args.IP)
-    await wizctrl.run(args)
+    wizcon = Wizcon(args.IP)
+    await wizcon.run(args)
 
 if __name__ == "__main__":
     asyncio.run(main())
