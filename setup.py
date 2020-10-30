@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wizcon",
-    version="0.1.0",
+    version="0.1.1",
     author="Robert Gomez, Jr.",
     author_email="rgomezjnr@gmail.com",
     description="Control Philips WiZ Connected smart light bulbs",
