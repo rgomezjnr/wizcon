@@ -5,9 +5,12 @@ Control Philips WiZ Connected smart light bulbs
 - [Python 3](https://www.python.org/downloads/)
 - [pywizlight](https://github.com/sbidy/pywizlight)
 
+## Installation
+    pip install wizcon
+
 ## Usage
 ```
-usage: wizcon.py [-h] [-si {1-32}] IP {ON,OFF,SWITCH}
+usage: wizcon [-h] [-si {1-32}] IP {ON,OFF,SWITCH}
 
 Control Philips WiZ Connected smart light bulbs
 
@@ -57,16 +60,16 @@ Scene Table
 Examples
 
 Turn smart bulb on:
-python3 wizcon.py 192.168.1.100 ON
+wizcon 192.168.1.100 ON
 
 Turn smart bulb off:
-python3 wizcon.py 192.168.1.100 OFF
+wizcon 192.168.1.100 OFF
 
 Switch smart bulb between on and off states:
-python3 wizcon.py 192.168.1.100 SWITCH
+wizcon 192.168.1.100 SWITCH
 
 Set scene to "Deepdive" using scene ID:
-python3 wizcon.py 192.168.1.100 ON --scene_id 23
+wizcon 192.168.1.100 ON --scene_id 23
 ```
 
 ## Source code
