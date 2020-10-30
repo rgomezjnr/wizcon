@@ -102,5 +102,9 @@ async def main():
     wizcon = Wizcon(args.IP)
     await wizcon.run(args)
 
+# Entry point for running launch script after installing package, see setup.py
+def main_async():
+    return asyncio.run(main())
+
 if __name__ == "__main__":
     asyncio.run(main())

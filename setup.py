@@ -16,6 +16,7 @@ setuptools.setup(
     python_requires='>=3.6',
     install_requires=["pywizlight"],
     license="MIT",
+    entry_points ={'console_scripts':['wizcon=wizcon.wizcon:main_async']},
     keywords="philips wiz wifi wireless home automation cli tool",
     classifiers=[
         "Programming Language :: Python :: 3",
