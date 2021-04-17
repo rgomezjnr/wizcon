@@ -15,14 +15,11 @@ class Wizcon():
     async def turn_bulb_on(self):
         await self.light.turn_on(PilotBuilder())
     
-    async def turn_bulb_on_scene_id(self, scene_id):
+    async def set_scene_id(self, scene_id):
         await self.light.turn_on(PilotBuilder(scene = scene_id))
 
-    async def turn_bulb_on_brightness(self, brightness_val):
+    async def set_brightness(self, brightness_val):
         await self.light.turn_on(PilotBuilder(brightness = brightness_val))
-
-    async def turn_bulb_on_scene_brightness(self, scene_id, brightness_val):
-        await self.light.turn_on(PilotBuilder(scene = scene_id, brightness = brightness_val))
 
     async def turn_bulb_off(self):
         await self.light.turn_off()
@@ -32,14 +29,12 @@ class Wizcon():
     
     async def run(self, args):
         if args.COMMAND == 'ON':
-            if (args.scene_id is not None) and (args.brightness is not None):
-                await self.turn_bulb_on_scene_brightness(args.scene_id, args.brightness)
-            elif (args.scene_id is not None):
-                await self.turn_bulb_on_scene_id(args.scene_id)
-            elif (args.brightness is not None):
-                await self.turn_bulb_on_brightness(args.brightness)
-            else:
-                await self.turn_bulb_on()
+            await self.turn_bulb_on()
+            if (args.scene_id is not None):
+                await self.set_scene_id(args.scene_id)
+            if (args.brightness is not None):
+                await self.set_brightness(args.brightness)
+
         elif args.COMMAND == 'OFF':
             await self.turn_bulb_off()
         elif args.COMMAND == 'SWITCH':
