@@ -18,6 +18,12 @@ class Wizcon():
     async def turn_bulb_on_scene_id(self, scene_id):
         await self.light.turn_on(PilotBuilder(scene = scene_id))
 
+    async def turn_bulb_on_brightness(self, brightness_val):
+        await self.light.turn_on(PilotBuilder(brightness = brightness_val))
+
+    async def turn_bulb_on_scene_brightness(self, scene_id, brightness_val):
+        await self.light.turn_on(PilotBuilder(scene = scene_id, brightness = brightness_val))
+
     async def turn_bulb_off(self):
         await self.light.turn_off()
     
@@ -26,8 +32,12 @@ class Wizcon():
     
     async def run(self, args):
         if args.COMMAND == 'ON':
-            if args.scene_id is not None:
+            if (args.scene_id is not None) and (args.brightness is not None):
+                await self.turn_bulb_on_scene_brightness(args.scene_id, args.brightness)
+            elif (args.scene_id is not None):
                 await self.turn_bulb_on_scene_id(args.scene_id)
+            elif (args.brightness is not None):
+                await self.turn_bulb_on_brightness(args.brightness)
             else:
                 await self.turn_bulb_on()
         elif args.COMMAND == 'OFF':
@@ -86,13 +96,16 @@ def parse_args(args):
 
         Set scene to "Deepdive" using scene ID:
         python3 wizcon.py 192.168.1.100 ON --scene_id 23
+
+        Set brightness to 255 (max brightness):
+        python3 wizcon.py 192.168.1.100 ON --brightness 255
         '''))
     parser.add_argument('IP', type=str, help='IP address of smart bulb')
     parser.add_argument('COMMAND', type=str.upper, choices=['ON', 'OFF', 'SWITCH'], help='Command sent to the smart bulb')
     parser.add_argument('-si', '--scene_id', type=int, choices=range(1,33), metavar='{1-32}', help='Set scene of smart bulb using scene ID')
     #parser.add_argument('-sn', '--scene_name', type=str, help='Set scene of smart bulb using scene name')
     #parser.add_argument('-c', '--color', type=str, help='Set color of smart bulb')
-    #parser.add_argument('-b', '--brightness', type=str, help='Set brightness of smart bulb')
+    parser.add_argument('-b', '--brightness', type=int, choices=range(0, 256), metavar='{0-255}', help='Set brightness of smart bulb')
     #parser.add_argument('-s', '--speed', type=str, help='Set color changing speed of smart bulb')
 
     return parser.parse_args(args)
