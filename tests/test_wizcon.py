@@ -5,7 +5,9 @@ import argparse
 import unittest
 from unittest import IsolatedAsyncioTestCase
 import wizcon
+from wizcon import wizcon
 import pywizlight.scenes
+
 
 class TestTurnBulbOn(IsolatedAsyncioTestCase):
     def setUp(self):
@@ -122,7 +124,18 @@ class TestWizconScene(IsolatedAsyncioTestCase):
         del self.args
         del self.wizcon
 
-#class TestTurnBulbOnBrightness(IsolatedAsyncioTestCase):
+class TestTurnBulbOnBrightness(IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.args = wizcon.parse_args([args.IP, 'on', '--brightness=28'])
+        self.wizcon = wizcon.Wizcon(self.args.IP)
+
+    async def test_wizcon_brightness(self):
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        brightness_value = state.get_brightness()
+        self.assertEqual(brightness_value, self.args.brightness)
+
 #class TestTurnBulbOnColor(IsolatedAsyncioTestCase):
 #class TestTurnBulbOnBrightnessAndColor(IsolatedAsyncioTestCase):
 
