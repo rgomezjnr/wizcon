@@ -81,19 +81,19 @@ def parse_args(args):
         Examples
 
         Turn smart bulb on:
-        python3 wizcon.py 192.168.1.100 ON
+        wizcon 192.168.1.100 ON
 
         Turn smart bulb off:
-        python3 wizcon.py 192.168.1.100 OFF
+        wizcon 192.168.1.100 OFF
 
         Switch smart bulb between on and off states:
-        python3 wizcon.py 192.168.1.100 SWITCH
+        wizcon 192.168.1.100 SWITCH
 
         Set scene to "Deepdive" using scene ID:
-        python3 wizcon.py 192.168.1.100 ON --scene_id 23
+        wizcon --scene_id 23 192.168.1.100 ON
 
         Set brightness to 255 (max brightness):
-        python3 wizcon.py 192.168.1.100 ON --brightness 255
+        wizcon --brightness 255 192.168.1.100 ON
         '''))
     parser.add_argument('IP', type=str, help='IP address of smart bulb')
     parser.add_argument('COMMAND', type=str.upper, choices=['ON', 'OFF', 'SWITCH'], help='Command sent to the smart bulb')

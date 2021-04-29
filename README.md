@@ -71,14 +71,30 @@ Switch smart bulb between on and off states:
 wizcon 192.168.1.100 SWITCH
 
 Set scene to "Deepdive" using scene ID:
-wizcon 192.168.1.100 ON --scene_id 23
+wizcon --scene_id 23 192.168.1.100 ON
+
+Set brightness to 255 (max brightness):
+wizcon --brightness 255 192.168.1.100 ON
 ```
+
+## Tested bulbs
+
+|                  |              |             |
+| ---------------- | ------------ |------------ |
+| Model            | A19 (RGB)    |AE27 (White) |
+| Firmware Version | 1.22.0       |1.17.1       |
+| Model ID         | 23007        |23032        |
+
+## Related
+[Smart-Bulb-Control](https://github.com/rgomezjnr/Smart-Bulb-Control) - Rainmeter skin for controlling smart light bulbs
 
 ## Source code
 https://github.com/rgomezjnr/wizcon
 
-## Author
+## Authors
 [Robert Gomez, Jr.](https://github.com/rgomezjnr)
+
+[Ariq Fidlan](https://github.com/ariqfadlan)
 
 ## License
 [MIT](https://github.com/rgomezjnr/wizcon/blob/master/LICENSE.txt)
