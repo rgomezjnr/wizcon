@@ -4,7 +4,6 @@ import sys
 import argparse
 import unittest
 from unittest import IsolatedAsyncioTestCase
-import wizcon
 from wizcon import wizcon
 import pywizlight.scenes
 
@@ -57,13 +56,13 @@ class TestSwitchBulb(IsolatedAsyncioTestCase):
     def tearDown(self):
         del self.wizcon
 
-class TestTurnBulbOnSceneId(IsolatedAsyncioTestCase):
+class TestSetSceneId(IsolatedAsyncioTestCase):
     def setUp(self):
         self.wizcon = wizcon.Wizcon(args.IP)
         self.scene_id = 23
 
-    async def test_turn_bulb_on_scene_id(self):
-        await self.wizcon.turn_bulb_on_scene_id(self.scene_id)
+    async def test_set_scene_id(self):
+        await self.wizcon.set_scene_id(self.scene_id)
         state = await self.wizcon.light.updateState()
         scene_name = state.get_scene()
         scene_id = self.wizcon.light.get_id_from_scene_name(scene_name)
@@ -73,34 +72,33 @@ class TestTurnBulbOnSceneId(IsolatedAsyncioTestCase):
         del self.wizcon
         del self.scene_id
 
-class TestTurnBulbOnSceneIdInvalid(IsolatedAsyncioTestCase):
+class TestSetSceneIdInvalid(IsolatedAsyncioTestCase):
     def setUp(self):
         self.wizcon = wizcon.Wizcon(args.IP)
         self.scene_id = 0
 
-    async def test_turn_bulb_on_scene_id_invalid(self):
+    async def test_set_scene_id_invalid(self):
         with self.assertRaises(IndexError):
-            await self.wizcon.turn_bulb_on_scene_id(self.scene_id)
+            await self.wizcon.set_scene_id(self.scene_id)
 
         self.scene_id = 33
 
         with self.assertRaises(IndexError):
-            await self.wizcon.turn_bulb_on_scene_id(self.scene_id)
+            await self.wizcon.set_scene_id(self.scene_id)
 
     def tearDown(self):
         del self.wizcon
         del self.scene_id
-
-class TestTurnBulbOnSceneAll(IsolatedAsyncioTestCase):
+class TestSetSceneIdAll(IsolatedAsyncioTestCase):
     def setUp(self):
         self.wizcon = wizcon.Wizcon(args.IP)
 
-    async def test_turn_bulb_on_scene_all(self):
+    async def test_set_scene_id_all(self):
         for scene_id in pywizlight.scenes.SCENES.keys():
-            #if s == 1000:      # Skip scene 1000 Rhythm which fails test
+            #if scene_id == 1000:      # Skip scene 1000 Rhythm which fails test
             #    continue
 
-            await self.wizcon.turn_bulb_on_scene_id(scene_id)
+            await self.wizcon.set_scene_id(scene_id)
             state = await self.wizcon.light.updateState()
             scene_name = state.get_scene()
             self.assertEqual(self.wizcon.light.get_id_from_scene_name(scene_name), scene_id)
