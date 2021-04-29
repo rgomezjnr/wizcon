@@ -94,7 +94,7 @@ https://github.com/rgomezjnr/wizcon
 ## Authors
 [Robert Gomez, Jr.](https://github.com/rgomezjnr)
 
-[Ariq Fidlan](https://github.com/ariqfadlan)
+[Ariq Fadlan](https://github.com/ariqfadlan)
 
 ## License
 [MIT](https://github.com/rgomezjnr/wizcon/blob/master/LICENSE.txt)
