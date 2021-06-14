@@ -7,10 +7,11 @@ from unittest import IsolatedAsyncioTestCase
 from wizcon import wizcon
 import pywizlight.scenes
 
+IP = '192.168.0.101'
 
 class TestTurnBulbOn(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_turn_bulb_on(self):
         await self.wizcon.turn_bulb_on()
@@ -23,7 +24,7 @@ class TestTurnBulbOn(IsolatedAsyncioTestCase):
 
 class TestTurnBulbOff(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_turn_bulb_off(self):
         await self.wizcon.turn_bulb_off()
@@ -36,7 +37,7 @@ class TestTurnBulbOff(IsolatedAsyncioTestCase):
 
 class TestSwitchBulb(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_switch_bulb(self):
         state = await self.wizcon.light.updateState()
@@ -58,7 +59,7 @@ class TestSwitchBulb(IsolatedAsyncioTestCase):
 
 class TestSetSceneId(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
         self.scene_id = 23
 
     async def test_set_scene_id(self):
@@ -74,7 +75,7 @@ class TestSetSceneId(IsolatedAsyncioTestCase):
 
 class TestSetSceneIdInvalid(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
         self.scene_id = 0
 
     async def test_set_scene_id_invalid(self):
@@ -92,7 +93,7 @@ class TestSetSceneIdInvalid(IsolatedAsyncioTestCase):
 
 class TestSetSceneIdAll(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_set_scene_id_all(self):
         for scene_id in pywizlight.scenes.SCENES.keys():
@@ -110,7 +111,7 @@ class TestSetSceneIdAll(IsolatedAsyncioTestCase):
 class TestSetBrightness(IsolatedAsyncioTestCase):
     def setUp(self):
         self.brightness = 0
-        self.wizcon = wizcon.Wizcon(args.IP)
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_set_brightness(self):
         await self.wizcon.set_brightness(self.brightness)
@@ -146,8 +147,8 @@ class TestSetBrightness(IsolatedAsyncioTestCase):
 
 class TestWizconScene(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.args = wizcon.parse_args([args.IP, 'on', '--scene_id=1'])
-        self.wizcon = wizcon.Wizcon(self.args.IP)
+        self.args = wizcon.parse_args([IP, 'on', '--scene_id=1'])
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_wizcon_scene(self):
         await self.wizcon.run(self.args)
@@ -162,8 +163,8 @@ class TestWizconScene(IsolatedAsyncioTestCase):
 
 class TestWizconBrightness(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.args = wizcon.parse_args([args.IP, 'on', '--brightness=28'])
-        self.wizcon = wizcon.Wizcon(self.args.IP)
+        self.args = wizcon.parse_args([IP, 'on', '--brightness=28'])
+        self.wizcon = wizcon.Wizcon(IP)
 
     async def test_wizcon_brightness(self):
         await self.wizcon.run(self.args)
@@ -180,9 +181,4 @@ class TestWizconBrightness(IsolatedAsyncioTestCase):
 #class TestTurnBulbOnBrightnessAndColor(IsolatedAsyncioTestCase):
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Test wizcon')
-    parser.add_argument('IP', type=str, help='IP address of smart bulb')
-    parser.add_argument('unittest_args', nargs=argparse.REMAINDER, help='Additional arguments for unittest.main()')
-    args = parser.parse_args()
-    unittest_argv = [sys.argv[0]] + args.unittest_args
-    unittest.main(argv = unittest_argv)
+    unittest.main()
