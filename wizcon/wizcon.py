@@ -21,6 +21,18 @@ class Wizcon():
     async def set_brightness(self, brightness_val):
         await self.light.turn_on(PilotBuilder(brightness = brightness_val))
 
+    async def decrease_brightness(self, brightness_val):
+        state = await self.light.updateState()
+        initial_brightness = state.get_brightness()
+
+        await self.light.turn_on(PilotBuilder(brightness = initial_brightness - brightness_val))
+
+    async def increase_brightness(self, brightness_val):
+        state = await self.light.updateState()
+        initial_brightness = state.get_brightness()
+
+        await self.light.turn_on(PilotBuilder(brightness = initial_brightness + brightness_val))
+
     async def turn_bulb_off(self):
         await self.light.turn_off()
     
@@ -34,6 +46,10 @@ class Wizcon():
                 await self.set_scene_id(args.scene_id)
             if (args.brightness is not None):
                 await self.set_brightness(args.brightness)
+            if (args.brightness_decrease is not None):
+                await self.decrease_brightness(args.brightness_decrease)
+            if (args.brightness_increase is not None):
+                await self.increase_brightness(args.brightness_increase)
 
         elif args.COMMAND == 'OFF':
             await self.turn_bulb_off()
@@ -101,6 +117,8 @@ def parse_args(args):
     #parser.add_argument('-sn', '--scene_name', type=str, help='Set scene of smart bulb using scene name')
     #parser.add_argument('-c', '--color', type=str, help='Set color of smart bulb')
     parser.add_argument('-b', '--brightness', type=int, choices=range(0, 256), metavar='{0-255}', help='Set brightness of smart bulb')
+    parser.add_argument('-bd', '--brightness_decrease', type=int, choices=range(0, 256), metavar='{0-255}', help='Decrease brightness of bulb by X amount')
+    parser.add_argument('-bi', '--brightness_increase', type=int, choices=range(0, 256), metavar='{0-255}', help='Increase brightness of bulb by X amount')
     #parser.add_argument('-s', '--speed', type=str, help='Set color changing speed of smart bulb')
 
     return parser.parse_args(args)

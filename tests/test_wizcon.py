@@ -177,6 +177,94 @@ class TestWizconBrightness(IsolatedAsyncioTestCase):
         del self.args
         del self.wizcon
 
+class TestWizconDecreaseBrightness(IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.args = wizcon.parse_args([IP, 'on', '--brightness_decrease=0'])
+        self.wizcon = wizcon.Wizcon(IP)
+
+    async def test_wizcon_decrease_brightness_min(self):
+        state = await self.wizcon.light.updateState()
+        initial_brightness = state.get_brightness()
+
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        new_brightness = state.get_brightness()
+        self.assertEqual(new_brightness, initial_brightness - self.args.brightness_decrease)
+
+    async def test_wizcon_decrease_brightness_mid(self):
+        self.args.brightness = 128
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        initial_brightness = state.get_brightness()
+
+        self.args.brightness_decrease = 64
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        new_brightness = state.get_brightness()
+        self.assertEqual(new_brightness, initial_brightness - self.args.brightness_decrease)
+
+    async def test_wizcon_decrease_brightness_max(self):
+        self.args = wizcon.parse_args([IP, 'on', '--brightness=255'])
+        await self.wizcon.run(self.args)
+
+        self.args = wizcon.parse_args([IP, 'on', '--brightness_decrease=255'])
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        brightness = state.get_brightness()
+        self.assertEqual(brightness, 26)
+
+    def tearDown(self):
+        del self.args
+        del self.wizcon
+
+class TestWizconIncreaseBrightness(IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.args = wizcon.parse_args([IP, 'on', '--brightness_increase=0'])
+        self.wizcon = wizcon.Wizcon(IP)
+
+    async def test_wizcon_increase_brightness_min(self):
+        state = await self.wizcon.light.updateState()
+        initial_brightness = state.get_brightness()
+
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        new_brightness = state.get_brightness()
+        self.assertEqual(new_brightness, initial_brightness + self.args.brightness_increase)
+
+    async def test_wizcon_increase_brightness_mid(self):
+        self.args.brightness = 144
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        initial_brightness = state.get_brightness()
+
+        self.args.brightness_increase = 64
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        new_brightness = state.get_brightness()
+        self.assertEqual(new_brightness, initial_brightness + self.args.brightness_increase)
+
+    async def test_wizcon_increase_brightness_max(self):
+        self.args = wizcon.parse_args([IP, 'on', '--brightness=0'])
+        await self.wizcon.run(self.args)
+
+        self.args = wizcon.parse_args([IP, 'on', '--brightness_increase=255'])
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        brightness = state.get_brightness()
+        self.assertEqual(brightness, 255)
+
+    def tearDown(self):
+        del self.args
+        del self.wizcon
+
 #class TestTurnBulbOnColor(IsolatedAsyncioTestCase):
 #class TestTurnBulbOnBrightnessAndColor(IsolatedAsyncioTestCase):
 
