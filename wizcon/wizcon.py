@@ -29,12 +29,12 @@ class Wizcon():
     
     async def run(self, args):
         if args.COMMAND == 'ON':
-            await self.turn_bulb_on()
-            if (args.scene_id is not None):
+            if (args.scene_id is not None and args.brightness is not None):
+                await self.turn_bulb_on()
+            elif (args.scene_id is not None):
                 await self.set_scene_id(args.scene_id)
-            if (args.brightness is not None):
+            elif (args.brightness is not None):
                 await self.set_brightness(args.brightness)
-
         elif args.COMMAND == 'OFF':
             await self.turn_bulb_off()
         elif args.COMMAND == 'SWITCH':
