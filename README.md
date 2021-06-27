@@ -10,7 +10,7 @@ Control Philips WiZ Connected smart light bulbs
 
 ## Usage
 ```
-usage: wizcon [-h] [-si {1-32}] [-b {0-255}] IP {ON,OFF,SWITCH}
+usage: wizcon [-h] [-si {1-32}] [-b {0-255}] [-v] IP {ON,OFF,SWITCH}
 
 Control Philips WiZ Connected smart light bulbs
 
@@ -24,6 +24,7 @@ optional arguments:
                         Set scene of smart bulb using scene ID
   -b {0-255}, --brightness {0-255}
                         Set brightness of smart bulb
+  -v, --version         show program's version number and exit
 
 Scene Table
 1: "Ocean"
