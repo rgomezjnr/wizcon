@@ -88,13 +88,22 @@ wizcon --brightness 255 192.168.1.100 ON
 ## Related
 [Smart-Bulb-Control](https://github.com/rgomezjnr/Smart-Bulb-Control) - Rainmeter skin for controlling smart light bulbs
 
-## Source code
-https://github.com/rgomezjnr/wizcon
+## Support
+If you find an issue or have any feedback please submit an issue on [GitHub](https://github.com/rgomezjnr/wizcon/issues).
+
+If you would like to show your support donations are greatly appeciated via:
+- [GitHub Sponsors](https://github.com/sponsors/rgomezjnr)
+- [PayPal](https://paypal.me/rgomezjnr)
+- [Bitcoin:](bitcoin:bc1qh46qmztl77d9dl8f6ezswvqdqxcaurrqegca2p) bc1qh46qmztl77d9dl8f6ezswvqdqxcaurrqegca2p
+- [Ethereum:](ethereum:0xAB443e578c9eA629088e26A9009e44Ed40f68678) 0xAB443e578c9eA629088e26A9009e44Ed40f68678
 
 ## Authors
 [Robert Gomez, Jr.](https://github.com/rgomezjnr)
 
 [Ariq Fadlan](https://github.com/ariqfadlan)
+
+## Source code
+https://github.com/rgomezjnr/wizcon
 
 ## License
 [MIT](https://github.com/rgomezjnr/wizcon/blob/master/LICENSE.txt)
