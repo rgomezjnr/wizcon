@@ -41,7 +41,9 @@ class Wizcon():
             await self.switch_bulb()
 
 def parse_args(args):
-    parser = argparse.ArgumentParser(description='Control Philips WiZ Connected smart light bulbs',
+    parser = argparse.ArgumentParser(
+        prog='wizcon',
+        description='Control Philips WiZ Connected smart light bulbs',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=textwrap.dedent('''\
         Scene Table
@@ -102,6 +104,7 @@ def parse_args(args):
     #parser.add_argument('-c', '--color', type=str, help='Set color of smart bulb')
     parser.add_argument('-b', '--brightness', type=int, choices=range(0, 256), metavar='{0-255}', help='Set brightness of smart bulb')
     #parser.add_argument('-s', '--speed', type=str, help='Set color changing speed of smart bulb')
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.2.1')
 
     return parser.parse_args(args)
 
