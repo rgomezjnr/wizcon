@@ -177,6 +177,24 @@ class TestWizconBrightness(IsolatedAsyncioTestCase):
         del self.args
         del self.wizcon
 
+class TestWizconOnNoOptions(IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.args = wizcon.parse_args([IP, 'on'])
+        self.wizcon = wizcon.Wizcon(IP)
+
+    async def test_wizcon_on_no_options(self):
+        await self.wizcon.turn_bulb_off()
+        await self.wizcon.run(self.args)
+
+        state = await self.wizcon.light.updateState()
+        response = state.get_state()
+        self.assertEqual(response, True)
+
+    def tearDown(self):
+        del self.args
+        del self.wizcon
+
+#class TestWizconSceneAndBrightness(IsolatedAsyncioTestCase):
 #class TestTurnBulbOnColor(IsolatedAsyncioTestCase):
 #class TestTurnBulbOnBrightnessAndColor(IsolatedAsyncioTestCase):
 

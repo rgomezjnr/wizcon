@@ -29,12 +29,12 @@ class Wizcon():
     
     async def run(self, args):
         if args.COMMAND == 'ON':
-            if (args.scene_id is not None and args.brightness is not None):
-                await self.turn_bulb_on()
-            elif (args.scene_id is not None):
+            if (args.scene_id):
                 await self.set_scene_id(args.scene_id)
-            elif (args.brightness is not None):
+            elif (args.brightness):
                 await self.set_brightness(args.brightness)
+            else:
+                await self.turn_bulb_on()
         elif args.COMMAND == 'OFF':
             await self.turn_bulb_off()
         elif args.COMMAND == 'SWITCH':
@@ -104,7 +104,7 @@ def parse_args(args):
     #parser.add_argument('-c', '--color', type=str, help='Set color of smart bulb')
     parser.add_argument('-b', '--brightness', type=int, choices=range(0, 256), metavar='{0-255}', help='Set brightness of smart bulb')
     #parser.add_argument('-s', '--speed', type=str, help='Set color changing speed of smart bulb')
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.2.1')
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.2.2')
 
     return parser.parse_args(args)
 
