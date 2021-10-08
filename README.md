@@ -24,6 +24,8 @@ optional arguments:
                         Set scene of smart bulb using scene ID
   -b {0-255}, --brightness {0-255}
                         Set brightness of smart bulb
+  -rgb {0-255} {0-255} {0-255}, --rgb {0-255} {0-255} {0-255}
+                        Set RGB color of smart bulb
   -v, --version         show program's version number and exit
 
 Scene Table
@@ -76,6 +78,9 @@ wizcon --scene_id 23 192.168.1.100 ON
 
 Set brightness to 255 (max brightness):
 wizcon --brightness 255 192.168.1.100 ON
+
+Set smart bulb color to blue:
+wizcon -rgb 0 0 255 192.168.1.100 ON
 ```
 
 ## Tested bulbs

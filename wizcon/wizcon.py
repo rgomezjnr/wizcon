@@ -21,6 +21,9 @@ class Wizcon():
     async def set_brightness(self, brightness_val):
         await self.light.turn_on(PilotBuilder(brightness = brightness_val))
 
+    async def set_rgb(self, rgb):
+        await self.light.turn_on(PilotBuilder(rgb = (rgb[0], rgb[1], rgb[2])))
+
     async def turn_bulb_off(self):
         await self.light.turn_off()
     
@@ -33,6 +36,8 @@ class Wizcon():
                 await self.set_scene_id(args.scene_id)
             elif (args.brightness):
                 await self.set_brightness(args.brightness)
+            elif (args.rgb):
+                await self.set_rgb(args.rgb)
             else:
                 await self.turn_bulb_on()
         elif args.COMMAND == 'OFF':
@@ -96,6 +101,9 @@ def parse_args(args):
 
         Set brightness to 255 (max brightness):
         wizcon --brightness 255 192.168.1.100 ON
+
+        Set smart bulb color to blue:
+        wizcon -rgb 0 0 255 192.168.1.100 ON
         '''))
     parser.add_argument('IP', type=str, help='IP address of smart bulb')
     parser.add_argument('COMMAND', type=str.upper, choices=['ON', 'OFF', 'SWITCH'], help='Command sent to the smart bulb')
@@ -103,8 +111,9 @@ def parse_args(args):
     #parser.add_argument('-sn', '--scene_name', type=str, help='Set scene of smart bulb using scene name')
     #parser.add_argument('-c', '--color', type=str, help='Set color of smart bulb')
     parser.add_argument('-b', '--brightness', type=int, choices=range(0, 256), metavar='{0-255}', help='Set brightness of smart bulb')
+    parser.add_argument('-rgb', '--rgb', nargs=3, type=int, choices=range(0, 256), metavar='{0-255}', help='Set RGB color of smart bulb')
     #parser.add_argument('-s', '--speed', type=str, help='Set color changing speed of smart bulb')
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.2.2')
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.3.0')
 
     return parser.parse_args(args)
 
