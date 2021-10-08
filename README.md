@@ -10,7 +10,7 @@ Control Philips WiZ Connected smart light bulbs
 
 ## Usage
 ```
-usage: wizcon [-h] [-si {1-32}] [-b {0-255}] [-v] IP {ON,OFF,SWITCH}
+usage: wizcon [-h] [-si {1-32}] [-b {0-255}] [-rgb {0-255} {0-255} {0-255}] [-v] IP {ON,OFF,SWITCH}
 
 Control Philips WiZ Connected smart light bulbs
 
