@@ -85,11 +85,11 @@ wizcon -rgb 0 0 255 192.168.1.100 ON
 
 ## Tested bulbs
 
-|                  |              |             |
-| ---------------- | ------------ |------------ |
-| Model            | A19 (RGB)    |AE27 (White) |
-| Firmware Version | 1.22.0       |1.17.1       |
-| Model ID         | 23007        |23032        |
+|   | Model            | Model ID     | Firmware    | 
+|---| ---------------- | ------------ |------------ |
+| 1 | A19 (RGB)        | 1.22.0       | 23007       |
+| 2 | A21 (RGB)        | 1.24.0       | B23078      |
+| 3 | AE27 (White)     | 1.17.1       | 23032       |
 
 ## Related
 [Smart-Bulb-Control](https://github.com/rgomezjnr/Smart-Bulb-Control) - Rainmeter skin for controlling smart light bulbs
